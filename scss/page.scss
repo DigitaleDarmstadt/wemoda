@@ -1,0 +1,1759 @@
+// todos
+//kopfbereich heading, icons, kronkorken(liveseite vorbild)
+
+//form flat
+
+/**************************************************************
+ ***                   GENERAL                              ***
+ **************************************************************/
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  //spacer for fixed nav
+  padding-top: 110px;
+}
+
+.width-wrapper {
+  flex-grow: 1;
+  max-width: $page-width;
+  padding: 0 3vw;
+  @include breakpoint(medium) {
+    padding: 0 $squeeze-content;
+  }
+  margin: 0 auto;
+  position: relative;
+}
+
+.vertical-for-small-only {
+  z-index: 98765;
+  flex-direction: column;
+  @include breakpoint(medium) {
+    flex-direction: row;
+  }
+}
+
+.expand-for-small-only {
+  align-self: stretch;
+  a {
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+.nowrap {
+  flex-wrap: nowrap;
+}
+
+a {
+  //border-bottom: $primary-color 1px solid;
+  //box-sizing: content-box;
+  //flex-basis: 0;
+  transition: color 0.25s ease-out;
+  &:hover {
+    //border-bottom: $primary-color 3px solid;
+    color: $secondary-color;
+  }
+  &:hover.button, &:hover.menu-button {
+    //border-bottom: $primary-color 3px solid;
+    color: $white;
+  }
+  &.blacklink {
+    color: $black;
+  }
+}
+
+.columns-small-only {
+  flex-direction: column;
+  @include breakpoint(medium) {
+    flex-direction: row;
+  }
+  flex-wrap: nowrap;
+}
+
+.more {
+  @include button($background: rgba(0, 0, 0, 1), $background-hover: $black);
+  font-weight: bold;
+  color: $white;
+  &:hover, &:focus {
+    background-color: $primary-color;
+
+    font-weight: bold;
+  }
+  margin: 1em 0;
+}
+
+.perm-link {
+  position: absolute;
+  bottom: 0;
+}
+
+.expander {
+  display: none;
+  &.toggled {
+    display: block;
+  }
+}
+
+.no-padding-inside {
+  * {
+    padding: 0 !important;
+  }
+}
+
+/**************************************************************
+ ***                          HEADERS                       ***
+ **************************************************************/
+
+h5 {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0;
+  margin: 0;
+}
+
+h4 {
+  font-weight: 300;
+  font-size: 1.2rem;
+  padding: 0;
+  padding-bottom: 0.1rem;
+  margin: 0;
+}
+
+h3 {
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-top: 2rem;
+}
+
+h2 {
+  text-transform: uppercase;
+  z-index: 1000;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: $white;
+  background-color: $black;
+  position: relative;
+  display: inline-block;
+  padding: 3px 15px;
+  font-weight: bold;
+  margin-left: - 3vw;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  @include breakpoint(medium) {
+    font-size: 2.4rem;
+  }
+  @include breakpoint(large) {
+    font-size: 3.0rem;
+    margin-left: - $squeeze-content;
+  }
+
+  @if ($preview-mode) {
+    &::before, &::after {
+      position: absolute;
+      top: (100%-$section-header-after-height)/2;
+      width: 100vw;
+      background-color: rgba($primary-color, $section-header-after-opacity);
+      height: $section-header-after-height;
+      content: ' ';
+    }
+    &::before {
+      right: 100%;
+    }
+    &::after {
+      left: 100%;
+    }
+  }
+}
+
+h1 {
+  display: block;
+  margin-bottom: 0.4rem;
+  line-height: 110%;
+  font-size: 1.7rem;
+  @include breakpoint(medium) {
+    font-size: 2rem;
+  }
+  margin-top: 2rem;
+}
+
+/**************************************************************
+ ***                   TOP BAR                              ***
+ **************************************************************/
+
+.menu-button {
+  text-transform: uppercase;
+  @include button($background: rgba(0, 0, 0, 0), $background-hover: $primary-color);
+  font-weight: bold;
+  margin: 0 0;
+
+  @include breakpoint(large) {
+    margin: 0 10px;
+  }
+  color: $black;
+  font-weight: bold;
+  position: relative;
+  font-size: 1.3rem;
+  @include breakpoint(medium) {
+    font-size: 0.7rem; //fallback...
+    font-size: calc(2.9vw - 10px);
+  }
+  @include breakpoint(723px) {
+    font-size: 0.9rem; //fallback...
+    font-size: calc(2.7vw - 10px);
+  }
+  @include breakpoint(large) {
+    font-size: 1.3em;
+    font-size: calc(2.7vw - 10px);
+  }
+  @include breakpoint(xlarge) {
+    font-size: 1.3em;
+  }
+}
+
+.menu {
+  @include breakpoint(small only) {
+    overflow: visible;
+    position: relative;
+    &::after {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      height: 200vh;
+      width: 100vw;
+      background-color: rgba($primary-color, 0.85);
+      content: ' ';
+    }
+  }
+  li a {
+    padding-left: 1em;
+    padding-right: 1em;
+    @include breakpoint(723px) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    @include breakpoint(large) {
+      padding-left: 0.7em;
+      padding-right: 0.7em;
+    }
+  }
+}
+
+.hamburger {
+  @include hamburger($color: $black, $color-hover: $dark-gray, $width: 50px, $height: 50px, $weight: 10px, $bars: 3);
+}
+
+.spacer {
+  flex-grow: 1;
+  @include breakpoint(medium) {
+    flex-grow: 0;
+  }
+  @include breakpoint(large) {
+    flex-grow: 1;
+  }
+}
+
+.top-bar {
+  @extend .width-wrapper;
+  padding: 1em 0;
+  background-color: $white;
+  &, & ul {
+    background-color: $white;
+  }
+}
+
+.mobile-top-bar {
+  @include breakpoint(small) {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+    flex-grow: 1;
+  }
+  flex-grow: 1;
+  @include breakpoint(medium) {
+    flex-grow: 0;
+  }
+  padding-left: 20px;
+}
+
+.menu-transition-for-mobile {
+  position: absolute;
+  left: 0;
+  @include breakpoint(medium) {
+    position: inherit;
+  }
+
+}
+
+body.is-reveal-open {
+  #Navigation {
+    display: none;
+  }
+}
+
+#nav-wrapper {
+  z-index: 4242;
+  top: 0;
+  position: fixed;
+  width: 100vw;
+  background-color: $white;
+  transition: top 0.25s ease-out;
+
+}
+
+#Navigation {
+  top: 0;
+  position: relative;
+  padding: 1em;
+  z-index: 4242;
+
+  .mobile-top-bar {
+    justify-content: space-between;
+  }
+  @include breakpoint(medium) {
+    .mobile-top-bar {
+      justify-content: inherit;
+    }
+  }
+}
+
+.nav-spacer {
+  height: 70px;
+  width: 100vw;
+  min-height: 70px;
+  min-width: 100vw;
+}
+
+/**************************************************************
+ ***                          HERO                          ***
+ **************************************************************/
+.hero {
+  padding: 40px 0;
+  background: $medium-gray; /* fallback */
+
+  @if ($preview-mode) {
+    background: url('../img/footer_lodyas.png');
+  } @else {
+    background-color: $light-gray;
+  }
+  overflow: hidden;
+  & .hero-content {
+    z-index: 100;
+    @include flex();
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    @include breakpoint(medium) {
+      justify-content: flex-start;
+
+    }
+    & .next-container {
+      z-index: 100;
+      width: (362px / 1.5);
+      height: (362px / 1.5);
+      margin-left: 0;
+      position: relative;
+
+      .kronkorken {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: -1;
+      }
+      @include breakpoint(511px) {
+        margin-left: 4em;
+      }
+      @include breakpoint(medium) {
+        width: (362px / 1);
+        height: (362px / 1);
+        margin-left: 0;
+      }
+      @include breakpoint(723px) {
+        margin-left: 4em;
+      }
+
+      @include flex();
+      justify-content: space-around;
+      align-items: center;
+      & .next-dates {
+        text-transform: uppercase;
+        @include flex();
+        flex-direction: column;
+        font-size: 1rem;
+        @include breakpoint(medium) {
+          font-size: 1.5rem;
+        }
+        & > .next-text {
+          padding: 0;
+          &.next-header {
+            line-height: 120%;
+            font-weight: bold;
+            font-size: 1.3em;
+          }
+          &.next-date {
+            line-height: 90%;
+            font-weight: bold;
+            font-size: 2.5em;
+          }
+          &.next-place {
+            line-height: 120%;
+            font-size: 1.3em;
+          }
+          &.next-time {
+            line-height: 120%;
+            font-size: 1.3em;
+          }
+        }
+      }
+    }
+  }
+  .headers {
+    z-index: 100;
+    display: inline-block;
+    left: 0;
+    position: relative;
+    & > .header-big, & > .header-thin {
+      text-transform: uppercase;
+      z-index: 100;
+      color: rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+    & > .header-big {
+      font-weight: bolder;
+      margin: 0;
+      font-size: 2.3rem;
+      line-height: 50%;
+      font-weight: bold;
+      margin-top: 0.3em;
+      @include breakpoint(medium) {
+        font-size: 5.3rem;
+        margin-top: 1em;
+      }
+    }
+    & > .header-thin {
+      font-weight: lighter;
+      font-size: 2.0rem;
+      @include breakpoint(medium) {
+        font-size: 4.8rem;
+      }
+    }
+  }
+}
+
+.hero-left-area {
+  z-index: 100;
+  padding-top: 30px;
+
+  .hashtag {
+    font-size: 1.3rem;
+    @include breakpoint(medium) {
+      font-size: 2.3rem;
+    }
+  }
+
+  .hero-left-buttons {
+    @include breakpoint(medium) {
+    }
+    @include flex();
+    justify-content: space-between;
+    align-items: center;
+    .hero-left-button {
+      display: inline-block;
+      background-image: url('../img/black_btn_bg.png');
+      background-repeat: no-repeat;
+      background-size: 100%;
+      width: (52px / 1.1);
+      height: (50px / 1.1);
+      @include flex();
+      justify-content: space-around;
+      align-items: center;
+
+
+      & .email {
+        width: 18px;
+        height: 15px;
+        background-image: url('../img/mail_icon.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
+      & .facebook {
+        width: 18px;
+        height: 15px;
+        background-image: url('../img/facebook_icon.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
+      & .twitter {
+        width: 18px;
+        height: 15px;
+        background-image: url('../img/zwitscher_icon.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
+    }
+  }
+}
+
+/**************************************************************
+ ***                   MAIN SECTIONS                        ***
+ **************************************************************/
+
+section {
+  @extend .width-wrapper;
+
+  padding-bottom: 5rem;
+
+  .info-bubble {
+    min-width: 330px;
+    max-width: 330px;
+    width: 330px;
+    //!IMPORTANT ONE °^°
+    margin-right: 4em;
+  }
+  @if ($preview-mode == false) {
+    &:nth-of-type(2n) {
+      background-color: $light-gray;
+      &::before, &::after {
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        background-color: $light-gray;
+        height: 100%;
+        content: ' ';
+      }
+      &::before {
+        right: 100%;
+      }
+      &::after {
+        left: 100%;
+      }
+    }
+  }
+}
+
+/***********************************
+ ***             Info            ***
+ ***********************************/
+
+#Info .row {
+  margin-top: 2em;
+  &:first-of-type {
+    margin-top: 0;
+  }
+  .text {
+    flex: 1;
+    width: 100%;
+    white-space: pre-line;
+    font-size: 1.2rem;
+  }
+}
+.livestream{
+  min-height: 545px;
+}
+.livestream-button{
+  @include button($color: $white, $background: $primary-color, $background-hover: $black);
+  text-transform: uppercase;
+  font-weight: bold;
+  box-sizing: content-box;
+  border: none;
+  margin-top: 0.7rem;
+  &:hover, &:focus, &:active {
+    font-weight: bold;
+    border: none;
+  }
+
+  font-size: 1.3rem;
+  @include breakpoint(medium) {
+    font-size: 0.7rem; //fallback...
+    font-size: calc(2.9vw - 10px);
+  }
+  @include breakpoint(723px) {
+    font-size: 0.9rem; //fallback...
+    font-size: calc(2.7vw - 10px);
+  }
+  @include breakpoint(large) {
+    font-size: 1.3em;
+    font-size: calc(2.7vw - 10px);
+  }
+  @include breakpoint(xlarge) {
+    font-size: 1.3em;
+  }
+}
+
+.event-button{
+
+  text-transform: uppercase;
+  @include button($background: rgba(0, 0, 0, 1), $background-hover: $black);
+
+  &:hover, &:focus {
+    background-color: $primary-color;
+
+    font-weight: bold;
+  }
+  margin: 0 0;
+  color: $white;
+  font-weight: bold;
+  position: relative;
+  font-size: 1.3rem;
+  @include breakpoint(medium) {
+    font-size: 0.7rem; //fallback...
+    font-size: calc(2.9vw - 10px);
+  }
+  @include breakpoint(723px) {
+    font-size: 0.9rem; //fallback...
+    font-size: calc(2.7vw - 10px);
+  }
+  @include breakpoint(large) {
+    font-size: 1.3em;
+    font-size: calc(2.7vw - 10px);
+  }
+  @include breakpoint(xlarge) {
+    font-size: 1.3em;
+  }
+}
+
+/***********************************
+ ***            Talks            ***
+ ***********************************/
+
+.tabs {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  & .tabs-title {
+    & a {
+      @include button($background: rgba(0, 0, 0, 0), $color: $black, $background-hover: $primary-color);
+      font-size: 2.5em;
+      padding: 0.1em 0.3em;
+      font-weight: lighter;
+      position: relative;
+      margin: 0 0 0 0;
+      @include breakpoint(medium) {
+        margin: 0 0.5em 0 0;
+      }
+      font-weight: bold;
+      &:hover, &:focus, &[aria-selected='true'] {
+        background-color: $primary-color;
+        color: $white;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.talk-heading {
+  align-self: flex-start;
+  font-weight: bold;
+  color: $white;
+  background-color: $black;
+  font-size: 1.2em;
+  display: inline-block;
+  text-transform: uppercase;
+  padding: 0.1em 1em;
+  margin-bottom: 0;
+}
+
+.tabs-content {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  & .tabs-panel {
+    padding: 1em 0 0 0;
+    & .talk-intro {
+
+      margin: 1em 0;
+      font-size: 1.2em;
+    }
+
+    & .talk-box {
+      &.fuenf-minuten-talk h3.talk-box-heading.first { //selector overflow for important without !important
+        margin-bottom: 0.6rem;
+      }
+      flex-wrap: nowrap;
+      & > img {
+        width: 260px;
+      }
+      & .talk-box-content {
+        width: 1%;
+        position: relative;
+        padding: 1em 2em;
+        flex-grow: 1;
+        .text {
+          flex: 1;
+          width: 100%;
+          font-size: 1.2rem;
+        }
+        .expander {
+          font-size: 1.2rem;
+        }
+      }
+      margin: 2em 0;
+      @if ($preview-mode) {
+        background-color: $medium-gray;
+        &.light {
+          background-color: $light-gray;
+          & > img {
+            position: relative;
+            left: -2px; //hover over border from outer box...
+            top: -2px;
+            margin-bottom: -4px;
+          }
+        }
+      } @else {
+        background-color: $light-gray;
+        &.light {
+          background-color: $white;
+          & > img {
+            position: relative;
+            left: -2px; //hover over border from outer box...
+            top: -2px;
+            margin-bottom: -4px;
+          }
+        }
+        border: 2px solid $white;
+      }
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+
+      & .talk-box-heading {
+        font-size: 1.3em;
+        margin-top: 1em;
+        margin-bottom: 0;
+        font-weight: bold;
+        &.first {
+          margin-bottom: 1em;
+          @include breakpoint(medium) {
+            margin-bottom: 2em;
+          }
+        }
+      }
+
+      & .talk-box-person {
+        font-size: 1.2rem;
+        margin: 0 2em 3em 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        & .name {
+          //white-space: nowrap;
+          color: rgba($black, 1);
+          font-weight: bold;
+        }
+        & a {
+          margin-bottom: 1em;
+        }
+      }
+    }
+  }
+}
+
+/***********************************
+ ***            Media            ***
+ ***********************************/
+
+//some anti-face-punching animations... trust me... they collaborate to the whole thing and save your face...
+.fade-in {
+  @include mui-fade($state: in, $duration: 0.25s);
+}
+
+.fade-out {
+  @include mui-fade($state: out, $from: 1, $to: 0, $duration: 0.25s);
+}
+
+.is-reveal-open {
+  .reveal-overlay {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 1);
+    @include breakpoint(medium) {
+      background-color: rgba(74, 184, 207, 0.85);
+    }
+  }
+}
+
+//okay it may be used elsewhere... but mainly for media so it built it's home in here ;3
+.reveal {
+  width: inherit !important;
+  top: 0 !important;
+  left: 0 !important;
+  display: block !important;
+  position: relative;
+  box-sizing: border-box;
+  max-width: inherit;
+  #media-modal-content {
+    * {
+      @include breakpoint(medium) {
+        max-width: 90vw;
+        max-height: 90vh;
+      }
+    }
+  }
+  outline: none;
+  overflow: visible;
+  //what a nice close button x.x
+  .close {
+    $size: 50px;
+    cursor: pointer;
+    width: $size;
+    height: $size;
+
+    @include breakpoint(medium) {
+      width: $size/2;
+      height: $size/2;
+    }
+    background-color: $black;
+    border: 2px solid $white;
+
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    @include breakpoint(medium) {
+      right: -10px;
+      top: -10px;
+    }
+    $cross-width: 6px;
+    $cross-length: 34px;
+    transition: box-shadow 0.25s ease-out, border 0.25s ease-out, background-color 0.25s ease-out;
+    &:before, &:after {
+      content: ' ';
+      width: $cross-width;
+      height: $cross-length;
+      border-radius: $cross-width/2;
+      left: 20px;
+      top: 5px;
+      @include breakpoint(medium) {
+        width: $cross-width/2;
+        height: $cross-length/2;
+        border-radius: $cross-width/4;
+        left: 9px;
+        top: 2px;
+      }
+      background-color: $white;
+      position: absolute;
+    }
+    &:before {
+      transform: rotateZ(45deg);
+      transition: transform 0.25s ease-out, background-color 0.5s ease-out;
+    }
+    &:after {
+      transform: rotateZ(-45deg);
+      transition: transform 0.5s ease-out, background-color 0.25s ease-out;
+    }
+    &:hover {
+      background-color: $white;
+      border: 2px solid $black;
+      //box-shadow: 0 0 7px 0 rgba($white, 0.9);
+      &:before {
+        transform: rotateZ(-45deg);
+        background-color: $black;
+      }
+      &:after {
+        transform: rotateZ(45deg);
+        background-color: $black;
+      }
+    }
+  }
+}
+
+.media-panel {
+  padding-left: 0;
+  padding-right: 0;
+  & .media-heading {
+    @extend .talk-heading;
+  }
+  & .media-type-text {
+    margin: 1.5em 0 0 0;
+  }
+}
+
+.media-container-wrap {
+  @include flex();
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.media-more {
+  @extend .more;
+  margin-top: 0;
+  align-self: flex-end;
+}
+
+/*************************
+ ***       IMAGE       ***
+ *************************/
+
+.media-images {
+
+  padding: 0;
+  @include flex-grid-row(null, $grid-row-width, $grid-width);
+  margin-left: -0.9375rem;
+  margin-right: -0.9375rem;
+  justify-content: flex-start;
+  position: relative;
+  & .image {
+    padding: 1em;
+    @include flex-grid-column($grid-width/$images-small);
+    @include breakpoint(medium only) {
+      @include flex-grid-column($grid-width/$images-medium);
+    }
+    @include breakpoint(large) {
+      @include flex-grid-column($grid-width/$images-large);
+    }
+    & img {
+      background: $white;
+      width: 100%;
+    }
+  }
+  //special hiding css for retracted areas ;3 only show $preview-rows-images rows of images
+  &.toggled {
+    & .image {
+      display: none;
+      &:nth-child(#{'-n+' + ($images-small*$preview-rows-images)}) {
+        display: inline-block;
+      }
+      @include breakpoint(medium only) {
+        &:nth-child(#{'-n+' + ($images-medium*$preview-rows-images)}) {
+          display: inline-block;
+        }
+      }
+      @include breakpoint(large) {
+        &:nth-child(#{'-n+' + ($images-large*$preview-rows-images)}) {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+/*************************
+ ***       VIDEO       ***
+ *************************/
+
+.media-videos {
+
+  padding: 0;
+  @include flex-grid-row(null, $grid-row-width, $grid-width, $gutter: 0);
+  margin-left: -0.9375rem;
+  margin-right: -0.9375rem;
+  justify-content: flex-start;
+  position: relative;
+  & .video {
+    padding: 1rem;
+    @include flex-grid-column($grid-width/$videos-small);
+    @include breakpoint(medium only) {
+      @include flex-grid-column($grid-width/$videos-medium);
+    }
+    @include breakpoint(large) {
+      @include flex-grid-column($grid-width/$videos-large);
+    }
+    & img {
+      background: $white;
+      width: 100%;
+    }
+    position: relative;
+    &:before, &:after {
+      content: ' ';
+      position: absolute;
+
+      transition: width 0.25s ease-out, height 0.25s ease-out, top 0.25s ease-out, left 0.25s ease-out, border 0.25s ease-out;
+    }
+    $size-big: 40px;
+    $size-small: 20px;
+    &:before {
+
+      background-color: rgba($primary-color, 0.5);
+
+      width: $size-big;
+      height: $size-big;
+      left: calc(50% - #{$size-big / 2});
+      top: calc(50% - #{$size-big / 2});
+      border-radius: 50%;
+    }
+    &:after {
+
+      width: 0;
+      height: 0;
+      border-left: #{$size-small / 1.5} solid rgba($white, 1);
+      border-top: #{$size-small / 2} solid transparent;
+      border-bottom: #{$size-small / 2} solid transparent;
+      left: calc(50% - #{$size-small / 2 - $size-small / 4});
+      top: calc(50% - #{$size-small / 2});
+    }
+    &:hover {
+      &:before {
+        width: $size-small;
+        height: $size-small;
+        left: calc(50% - #{$size-small / 2});
+        top: calc(50% - #{$size-small / 2});
+      }
+      &:after {
+        border-left: #{$size-big / 1.5} solid rgba($black, 0.5);
+        border-top: #{$size-big / 2} solid transparent;
+        border-bottom: #{$size-big / 2} solid transparent;
+        left: calc(50% - #{$size-big / 2 - $size-big / 4});
+        top: calc(50% - #{$size-big / 2});
+      }
+    }
+  }
+  // > .video
+  //special hiding css for retracted areas ;3 only show $preview-rows-videos rows of videos
+  &.toggled {
+    & .video {
+      display: none;
+      &:nth-child(#{'-n+' + ($videos-small*$preview-rows-videos)}) {
+        display: inline-block;
+      }
+      @include breakpoint(medium only) {
+        &:nth-child(#{'-n+' + ($videos-medium*$preview-rows-videos)}) {
+          display: inline-block;
+        }
+      }
+      @include breakpoint(large) {
+        &:nth-child(#{'-n+' + ($videos-large*$preview-rows-videos)}) {
+          display: inline-block;
+        }
+      }
+
+    }
+    // > .video
+  }
+}
+
+#player {
+  @include breakpoint(small only) {
+    width: calc(91vw);
+  }
+}
+
+/***********************************
+ ***          Sponsoren          ***
+ ***********************************/
+.sponsors {
+  @include flex-grid-row(null, $grid-row-width, 12);
+  margin-left: -0.9375rem;
+  margin-right: -0.9375rem;
+  & .sponsor {
+    padding: 1em;
+    @include flex-grid-column(6);
+    @include breakpoint(medium) {
+      @include flex-grid-column(4);
+    }
+    //@include breakpoint(large) {
+    //  @include flex-grid-column(3);
+    //}
+    & img {
+      background: $white;
+    }
+  }
+}
+
+/***********************************
+ ***           Kontakt           ***
+ ***********************************/
+#Kontakt {
+  //->spaaaaaaaaaaaaace<-
+  padding-bottom: 10em;
+}
+
+.contact-container {
+  z-index: 500;
+  position: relative;
+  width: (362px / 1.4);
+  height: (362px / 1.4);
+  min-width: (362px / 1.4);
+  min-height: (362px / 1.4);
+  @include breakpoint(medium) {
+    width: (362px / 1);
+    height: (362px / 1);
+    min-width: (362px / 1);
+    min-height: (362px / 1);
+  }
+  background-image: url("../img/kronkorken.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  @include flex();
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  & > .contact-center {
+    @include flex();
+    align-items: stretch;
+    font-size: 1rem;
+    @include breakpoint(medium) {
+      font-size: 1.3rem;
+    }
+    flex-direction: column;
+    & > .contact-text {
+      color: rgba(255, 255, 255, 1);
+      padding: 0;
+      font-size: 1.1em;
+      line-height: 120%;
+      font-weight: bold;
+      &.contact-slim {
+        font-weight: normal;
+      }
+      &.contact-mail {
+        line-height: 120%;
+        font-weight: bold;
+        color: $primary-color;
+      }
+
+    }
+  }
+}
+
+/***********************************
+ ***             FORM            ***
+ ***********************************/
+//nothing special here... just a nice looking form
+.form, .em-booking-form {
+  flex-grow: 1;
+  & .promoter {
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    & .question {
+
+    }
+    & .abo {
+      font-weight: bold;
+    }
+    & .hashtag {
+      font-weight: lighter;
+    }
+  }
+  .form-button, .em-booking-submit {
+  }
+  .input-group-button {
+    text-align: end;
+  }
+  input {
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color: $placeholder-color;
+      font-style: $placeholder-style;
+      font-weight: $placeholder-weight;
+    }
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+      color: $placeholder-color;
+      font-style: $placeholder-style;
+      font-weight: $placeholder-weight;
+      opacity: 1;
+    }
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+      color: $placeholder-color;
+      font-style: $placeholder-style;
+      font-weight: $placeholder-weight;
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: $placeholder-color;
+      font-style: $placeholder-style;
+      font-weight: $placeholder-weight;
+      opacity: 1;
+    }
+    box-shadow: none;
+    border: 1px solid rgba($primary-color, 0);
+    font-size: 1.5em;
+    &:focus, &:active, &:focus, &:hover {
+      box-shadow: none;
+      border: 1px solid $primary-color;
+    }
+  }
+}
+
+.em-booking-form {
+  width: 100%;
+  input {
+    background-color: $light-gray;
+  }
+
+  .em-booking-form-details {
+    float: none;
+    width: 100%;
+  }
+  .em-booking-buttons {
+    display: flex;
+    flex-direction: column;
+    .em-booking-submit {
+      align-self: flex-end;
+    }
+  }
+  .event-description {
+    font-size: 1.3rem;
+    margin-bottom: 2em;
+  }
+
+  .checkbox {
+    font-size: 1.2rem;
+    label{
+      margin: 0;
+      font-size: 1.2rem;
+    }
+    input[type='checkbox'] {
+      display: none;
+      & + label::before {
+        content: ' ';
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        position: relative;
+        top: 2px;
+        border: 1px solid #bbb;
+        background: white;
+        margin-right: 0.5rem;
+        box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, .1);
+      }
+      &:hover + label::before {
+        background: #ddd;
+        box-shadow: inset 0 0 0 2px white;
+      }
+      &:checked + label::before {
+        background: $primary-color;
+        box-shadow: inset 0 0 0 2px white;
+      }
+    }
+  }
+
+}
+
+.em-booking-message {
+  @include callout-base;
+  &-error {
+    @include callout-style(map-get($foundation-palette, alert));
+  }
+  &-success {
+    @include callout-style(map-get($foundation-palette, success));
+  }
+}
+
+/***********************************
+ ***            BLOG             ***
+ ***********************************/
+
+.blog-content {
+  background-color: $light-gray;
+  position: relative;
+  padding-top: 1px; //dirty fix...
+  &::before, &::after {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    background-color: $light-gray;
+    height: 100%;
+    content: ' ';
+  }
+  &::before {
+    right: 100%;
+  }
+  &::after {
+    left: 100%;
+  }
+
+  &.singlepost {
+    background-color: $white;
+    position: relative;
+    &::before, &::after {
+      content: none;
+    }
+
+    article {
+      background-color: $white;
+
+      .header-image-container {
+        position: relative;
+        overflow: hidden;
+        height: 150px;
+        @include breakpoint(medium) {
+          height: 200px;
+        }
+        @include breakpoint(large) {
+          height: 250px;
+        }
+        width: 100%;
+        .header-image {
+          height: 100%;
+          width: 100%;
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: cover;
+          position: absolute;
+        }
+      }
+      .post-teaser {
+        font-size: 1.2rem;
+      }
+      .post-content {
+        overflow: auto;
+        font-size: 1.2rem;
+        img {
+
+          width: 100%;
+          margin: 0;
+          padding: 0 2rem 1rem 2rem;
+          @include breakpoint(420px) {
+            width: auto;
+            display: block;
+            padding: 0;
+            &.alignright {
+              padding-left: 1rem;
+            }
+            &.alignleft {
+              padding-right: 1rem;
+            }
+          }
+          @include breakpoint(large) {
+            &.alignright {
+              padding-left: 2rem;
+            }
+            &.alignleft {
+              padding-right: 2rem;
+            }
+          }
+        }
+      }
+    }
+
+    .post-meta-wrapper {
+      margin: 2em 0;
+      font-size: 1.2rem;
+    }
+  }
+
+  //singlepost... overview/multipost below:
+  &.multipost {
+    article {
+      background-color: $white;
+      margin: 3em 0;
+
+      .prev-image-container {
+        position: relative;
+        display: flex;
+        min-height: 100px;
+        min-width: 100%;
+        @include breakpoint(large) {
+          min-width: inherit;
+        }
+        @include breakpoint(medium) {
+          min-height: 150px;
+        }
+        .prev-image {
+          position: relative;
+          overflow: hidden;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          body.fix-image & {
+            height: auto;
+          }
+          img {
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            position: absolute;
+            body.fix-image & {
+              height: auto;
+            }
+          }
+          &:after {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: $light-gray;
+            height: 100vh;
+            content: ' ';
+          }
+        }
+      }
+
+      .post {
+        padding: 2rem;
+
+        body.fix-flexbox & {
+          max-width: calc(66.666666667% - 1rem);
+        }
+
+      }
+    }
+    .post-content {
+      p:nth-child(2) {
+        @extend .row;
+        @extend .vertical;
+      }
+    }
+  }
+
+  //css+php magic n stuff... only insert |'s when not the last one ;3
+  .publish-meta-wrapper {
+    .publish-meta {
+      &:after {
+        content: '|';
+        padding: 0 0.5em;
+      }
+      &.last:after {
+        content: none !important;
+      }
+      &.last-small:after {
+        content: none;
+        @include breakpoint(medium) {
+          content: '|';
+          padding: 0 0.5em;
+        }
+      }
+      &.tags a {
+        margin-right: 1em;
+        &:before {
+          content: '#';
+        }
+      }
+    }
+  }
+
+  //round-em-up.... or down? who knows x3
+  .avatar {
+    border-radius: 50%;
+    margin: 0 1em 0 0;
+  }
+
+}
+
+.blog-content.multipost {
+  display: flex;
+  flex-direction: column;
+  ul.page-numbers li {
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+    @include breakpoint(medium) {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+ul.page-numbers {
+
+  &.single {
+    display: flex;
+    flex-basis: 0;
+    flex-grow: 0;
+    li {
+      display: flex;
+      justify-content: center;
+      width: 33%;
+      align-items: flex-start;
+
+    }
+  }
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 1em auto;
+  max-width: 55em;
+  a {
+    @include button($background: rgba(0, 0, 0, 1), $background-hover: $black);
+    font-weight: bold;
+    color: $white;
+    &:hover, &:focus {
+      background-color: $primary-color;
+      font-weight: bold;
+    }
+  }
+  span { //imitate a button but don't make it clickable... looks nicer in the layout ;3
+    @include button($background: rgba(0, 0, 0, 1), $background-hover: rgba(0, 0, 0, 1));
+    font-weight: bold;
+    color: $white;
+    &.current {
+      background-color: $primary-color;
+      font-weight: bold;
+    }
+    &.current, &.dots {
+      cursor: auto;
+    }
+  }
+  //only show some on medium/upwards
+  .page-numbers {
+    display: none;
+    &.current, &.prev, &.next, &.hold {
+      display: inline-block;
+    }
+  }
+  @include breakpoint(medium) {
+    justify-content: space-around;
+    .page-numbers {
+      display: inline-block;
+    }
+  }
+}
+
+/**************************************************************
+ ***                   FOOTER                               ***
+ **************************************************************/
+footer {
+  .hoster {
+    padding-top: 2em;
+  }
+  & .hoster-logos {
+    @include flex();
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-bottom: 7em;
+    a {
+      padding: 0.5em;
+    }
+  }
+  .impressum {
+    font-size: 1.3rem;
+    display: none;
+    @extend .width-wrapper;
+    margin-top: 2em;
+    padding-left: 0;
+    padding-right: 0;
+    .text {
+      flex: 1;
+      width: 100%;
+      margin-top: 3em;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+  }
+  .toggled + .impressum {
+    display: block;
+  }
+
+  .hoster {
+    @extend .width-wrapper;
+    padding-bottom: 10em;
+    @include flex();
+    flex-direction: column;
+    #Digitale-Darmstadt-footer {
+      margin: 2em 0;
+      font-size: 1.3em;
+    }
+  }
+  .grey {
+    @extend .width-wrapper;
+    background-color: $light-gray;
+    padding-top: 5em;
+    padding-bottom: 10em;
+    position: relative;
+    &:before, &:after {
+      content: ' ';
+      position: absolute;
+      height: 100%;
+      width: 100vw;
+      top: 0;
+      background-color: $light-gray;
+    }
+    &:before {
+      right: 100%;
+    }
+    &:after {
+      left: 100%;
+    }
+  }
+}
+
+/**************************************************************
+ ***                   FUN                                  ***
+ **************************************************************/
+
+.effect-slide-spawn {
+  position: relative;
+  width: (362px / 2);
+  height: (362px / 2);
+  @include breakpoint(medium) {
+    width: (362px / 1.5);
+    height: (362px / 1.5);
+  }
+  //position: absolute;
+  //-webkit-transform: translate(-100%, 0);
+  //-moz-transform: translate(-100%, 0);
+  //-ms-transform: translate(-100%, 0);
+  //-o-transform: translate(-100%, 0);
+  //transform: translate(-100%, 0);
+}
+
+.effect-fade-spawn {
+  overflow: hidden;
+  position: relative;
+}
+
+.pointer {
+  position: absolute;
+  /** will be used by Javascript... set to none to avoid flashing of new objects */
+  display: none;
+  z-index: 600;
+}
+
+/**************************************************************
+ ***                   NO FLASH ON PAGE LOAD                ***
+ **************************************************************/
+.no-js {
+  & .dropdown {
+    display: none;
+  }
+  @include breakpoint(small only) {
+    #desktop-menu {
+      display: none !important;
+    }
+  }
+
+  @include breakpoint(medium) {
+    #mobile-menu {
+      display: none !important;
+    }
+    & .dropdown {
+      display: flex;
+    }
+    & .menu-icon {
+      display: none;
+    }
+  }
+  .reveal {
+    display: none !important;
+  }
+  .impressum { //so it is open when there is no javascript...
+    display: block;
+  }
+
+}
+
+/**************************************************************
+ ***                     HIDE FOR NON ADMIN                 ***
+ ***   Not a critical link...  looks nicer without it...    ***
+ **************************************************************/
+
+.perm-link {
+  display: none;
+}
+
+/**************************************************************
+ ***                       FOUNDATION FIX                   ***
+ **************************************************************/
+.row {
+  &.vertical {
+    flex-direction: column;
+  }
+  .row {
+    margin: 0;
+  }
+}
+input[type='text']{
+  padding: 0 0.5rem;
+}
+
+/**************************************************************
+ ***                       WORDPRESS FIX                    ***
+ **************************************************************/
+
+/* DIRTY WORDPRESS WORKAROUND BECAHSE WORDPRESS TAKES <div class='more align-self-bottom'>MEHR</div>
+ * AND PLACES THE DIV OUTSIDE THE A TAG AND THE TEXT INSIDE IT...
+ * AFTER THAT THE TEXT COLOR WILL CHANGE THE WRONG WAY AND NOT THE ENTIRE BOX IS CLICKABLE...
+ * NOW WE MAKE THE LINK TO BE THE BOX...*/
+.more-link {
+  @extend .more;
+  @extend .align-self-bottom;
+  //IF THE CONTENT IS RIGHT THIS HERE SHOULD NEVER ME USED....
+  float: right;
+  &:after {
+    clear: both;
+  }
+}
+
+/**************************************************************
+ ***                    IE10 IMAGE SIZE FIX                 ***
+ **************************************************************/
+
+img {
+  width: auto;
+}
+
+/**************************************************************
+ ***                           ICONS                        ***
+ **************************************************************/
+
+.arrow-ltr {
+  font-size: 1.5em;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+
+  &:before, &:after {
+    content: ' ';
+    width: 2px;
+    height: 14px;
+    border-radius: 1px;
+    left: -18px;
+    background-color: $dark-gray;
+    position: absolute;
+  }
+  &:before {
+    top: 15px;
+    transform: rotateZ(45deg);
+    transition: left 0.25s ease-out, top 0.25s ease-out, transform 0.25s ease-out, background-color 0.25s ease-out;
+  }
+  &:after {
+    top: 7px;
+    transform: rotateZ(-45deg);
+    transition: left 0.25s ease-out, top 0.25s ease-out, transform 0.25s ease-out, background-color 0.25s ease-out;
+  }
+  &:hover, &.open {
+    @if ($transform-mode-arrow == 1) {
+      &:before {
+        top: 13px;
+        left: -26px;
+        transform: rotateZ(-45deg);
+        background-color: $black;
+      }
+      &:after {
+        top: 13px;
+        transform: rotateZ(45deg);
+        background-color: $black;
+      }
+    } @else if ($transform-mode-arrow == 2) {
+      &:before {
+        top: 13px;
+        background-color: $black;
+      }
+      &:after {
+        top: 13px;
+        left: -26px;
+        background-color: $black;
+      }
+    }
+  }
+}
+
+/**************************************************************************
+ *** Möglicherweise haben sie ihre Leistungen bereits kritisiert,       ***
+ *** aber es ist klar, dass sie verstehen wie die Welt der Ideen Sie    ***
+ *** beeinflusst, obwohl Sie manchmal der Realität überdrüssig sind     ***
+ *** und es Ihnen Vorlieben erlauben, Ihre Ansichten zu beeinflussen.   ***
+ *** Sie haben bisher ungeahnte geistige Fähigkeiten, die Sie aber      ***
+ *** bisher nicht zu ihrem Vorteil eingesetzt haben. Nach außen         ***
+ *** erscheinen Sie diszipliniert und selbstgesteuert, aber innerlich   ***
+ *** neigen Sie dazu, besorgt und unsicher zu sein, aber Sie sind       ***
+ *** trotzdem Stolz darauf, ein unabhängiger Denker zu sein und         ***
+ *** akzeptieren die Behauptungen anderer nicht ohne zufriedenstellende ***
+ *** Beweise.                    --Grüße, neko                          ***
+ **************************************************************************/

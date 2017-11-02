@@ -1,0 +1,13 @@
+{
+  "name": "wemoda",
+  "main": [
+    "stylesheets/foundation.css",
+    "javascript/foundation.js"
+  ],
+  "ignore": [],
+  "dependencies": {
+    "foundation-sites": "~6.2.0",
+    "motion-ui": "~1.2.0",
+    "jQuery": "^3.1.0"
+  }
+}
