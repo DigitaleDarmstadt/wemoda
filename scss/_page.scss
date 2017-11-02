@@ -947,7 +947,7 @@ section {
 .media-videos {
 
   padding: 0;
-  @include flex-grid-row(null, $grid-row-width, $grid-width, $gutter: 0);
+  @include flex-grid-row(null, $grid-row-width, $grid-width);
   margin-left: -0.9375rem;
   margin-right: -0.9375rem;
   justify-content: flex-start;

@@ -10,12 +10,30 @@
     "postinstall": "bower install && gulp build",
     "watch": "gulp"
   },
-  "author": "Neko",
-  "license": "ISC",
+  "author": {
+    "name": "Team Webmontag - Digitale Darmstadt",
+    "email": "kontakt@wemoda.de",
+    "url": "https://www.wemoda.de"
+  },
+  "contributors": [
+    {
+      "name": "Neko"
+    },
+    {
+      "name": "sonjaka",
+      "email": "sonja.karl@4wdmedia.de"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/DigitaleDarmstadt/wemoda/issues",
+    "email": "kontakt@wemoda.de"
+  },
+  "license": "UNLICENSED",
   "dependencies": {
     "babel-preset-es2015": "^6.14.0",
     "bower": "^1.7.9",
     "del": "^2.2.0",
+    "foundation-sites": "^6.4.4-rc1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-babel": "^6.1.2",
@@ -33,7 +51,7 @@
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.7",
     "merge-stream": "^1.0.0",
-    "motion-ui": "^1.2.2",
+    "motion-ui": "^1.2.3",
     "run-sequence": "^1.1.5"
   }
 }
