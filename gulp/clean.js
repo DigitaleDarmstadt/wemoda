@@ -1,3 +1,8 @@
+var $ = require('gulp-load-plugins')();
+var gulp = require('gulp');
+var sequence = require('run-sequence');
+var del = require('del');
+
 module.exports = function(config) {
 	gulp.task('clean', function (done) {
 		sequence(['clean:typescript', 'clean:javascript', 'clean:css'],
@@ -7,7 +12,7 @@ module.exports = function(config) {
 
 	gulp.task('clean:javascript', function () {
 		return del([
-			[config.scriptBase + config.defaultFilename + '.js'],
+			'javascript/app.js',
 		]);
 	});
 
@@ -20,8 +25,8 @@ module.exports = function(config) {
 
 	gulp.task('clean:css', function () {
 		return del([
-			[config.scriptBase + config.defaultFilename + '.css'],
-			[config.scriptBase + config.defaultFilename + '.css.map']
+        	'stylesheets/app.css',
+        	'stylesheets/app.css.map'
 		]);
 	});
 }

@@ -41,8 +41,8 @@ module.exports = function(config) {
         }))
         .pipe(minifycss)
         .pipe($.if(!isProduction, $.sourcemaps.write('.')))
-		// .pipe(gulp.dest(config.staticBasePath));
-		.pipe(gulp.dest('static'));
+		.pipe(gulp.dest(config.staticBasePathCss));
+		// .pipe(gulp.dest('static'));
 	})
 
 	gulp.task('css:watch', function() {
