@@ -34,6 +34,7 @@ declare var stylesheet_directory_uri: string;
         stylesheet_directory_uri + "/img/hero-stage-pfeile.svg",
         stylesheet_directory_uri + "/img/wemoda_hero_V20161121.svg",
         stylesheet_directory_uri + "/img/wemoda_hero_V20170410.svg",
+        stylesheet_directory_uri + "/img/wemoda_hero_V20180514.svg",
     ];
     function getFile():string {
         return particle_files[Math.floor(Math.random() * particle_files.length)];
